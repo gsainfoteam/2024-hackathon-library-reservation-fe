@@ -1,0 +1,24 @@
+.element {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 430px;
+  height: 932px;
+  overflow-y: auto;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  box-sizing: content-box;
+}
+
+.element .header {
+  color: #8f8f8f;
+  font-family: "Inter-Black", Helvetica;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: normal;
+  width: 369px;
+  height: 44px;
+  padding-top: 54px;
+  padding-left: 46px;
+  text-align: left;
+  box-sizing: content-box;
+}

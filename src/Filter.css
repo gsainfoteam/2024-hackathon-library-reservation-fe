@@ -1,0 +1,103 @@
+.Filter {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    width: 288px;
+    height: 23px;
+    padding-left: 46px;
+    padding-top: 54px;
+    padding-right: 0px;
+    text-align: left;
+    box-sizing: content-box;    
+}
+
+.Seats {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    width: 181px;
+    height: 22px;
+    padding-left: 46px;
+    padding-top: 6px;
+    padding-right: 0px;
+    text-align: left;
+    box-sizing: content-box;  
+}
+
+.SeatName {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    width: 142px;
+    height: 22px;
+    padding-left: 0px;
+    padding-top: 6px;
+    padding-right: 0px;
+    text-align: left;
+    box-sizing: content-box;  
+}
+
+.Time {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    width: 170px;
+    height: 22px;
+    padding-left: 46px;
+    padding-top: 16px;
+    padding-right: 0px;
+    text-align: left;
+    box-sizing: content-box;  
+}
+
+.RButton {
+    width: 13px;
+    height: 5px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+    text-align: left;
+    box-sizing: content-box;    
+}
+
+.Button {
+    width: 13px;
+    height: 5px;
+    padding-top: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
+    text-align: left;
+    box-sizing: content-box;    
+}
+
+
+.TimeNum {
+    color: #888;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    width: 60px;
+    height: 22px;
+    padding-left: 0px;
+    padding-top: 16px;
+    padding-right: 0px;
+    text-align: left;
+    box-sizing: content-box;  
+}
+
+.Hypoon {
+    color: #888;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    width: 20px;
+    height: 22px;
+    padding-left: 0px;
+    padding-top: 16px;
+    padding-right: 0px;
+    box-sizing: content-box;  
+}

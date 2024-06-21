@@ -17,6 +17,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (!!authCode) {
       console.log(authCode)
+      localStorage.setItem("accessToken", "12345")
     }
   }, [])
 
