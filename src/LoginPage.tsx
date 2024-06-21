@@ -1,4 +1,5 @@
-// import { useNavigate } from "react-router-dom";
+import { useEffect } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 const LoginPage = () => {
 
@@ -9,6 +10,23 @@ const LoginPage = () => {
     { field: "response_type", value: "code" },
     { field: "prompt", value: "consent" },
   ]
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+  const authCode = searchParams.get("code");
+
+  useEffect(() => {
+    if (!!authCode) {
+      console.log(authCode)
+    }
+  }, [])
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      navigate("/");
+    }
+  }, [])
 
   return (
     <form action={'https://idp.gistory.me/authorize?client_id=library_reservation&redirect_uri=http://localhost:5173/user/join&scope=openid%20profile%20email%20student_id%20offline_access&response_type=code&prompt=consent'}>
