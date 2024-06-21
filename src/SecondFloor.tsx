@@ -2,12 +2,39 @@ import { useState, useEffect, useRef } from "react";
 import { Row, Col } from "react-bootstrap";
 import "./SecondFloor.css";
 
-const SecondFloor = () => {
-  const reservedSeats = [240];
+interface ModalProps {
+  seatNumber: number;
+  closeModal: () => void;
+}
 
-  const isReserved = (seatNumber: any) => {
+const SecondFloor: React.FC = () => {
+  const reservedSeats: number[] = [240];
+  const [selectedSeat, setSelectedSeat] = useState<number | null>(null);
+
+  const isReserved = (seatNumber: number): boolean => {
     return reservedSeats.includes(seatNumber);
   };
+
+  const handleSeatClick = (seatNumber: number) => {
+    setSelectedSeat(seatNumber);
+  };
+
+  const closeModal = () => {
+    setSelectedSeat(null);
+  };
+
+  const Modal: React.FC<ModalProps> = ({ seatNumber, closeModal }) => (
+    <div className="modal" onClick={closeModal}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="reserve">예약하기</div>
+        <span className="close" onClick={closeModal}>
+          &times;
+        </span>
+        <p>Seat Number: {seatNumber}</p>
+        <p>Status: {isReserved(seatNumber) ? "Reserved" : "Available"}</p>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -21,6 +48,7 @@ const SecondFloor = () => {
               backgroundColor: isReserved(seatNumber) ? "#FF0000" : "#70FF00",
               border: "1px solid black",
             }}
+            onClick={() => handleSeatClick(seatNumber)}
           >
             {seatNumber}
           </div>
@@ -36,6 +64,7 @@ const SecondFloor = () => {
                 backgroundColor: isReserved(seatNumber) ? "#FF0000" : "#70FF00",
                 border: "1px solid black",
               }}
+              onClick={() => handleSeatClick(seatNumber)}
             >
               {seatNumber}
             </Col>
@@ -54,11 +83,15 @@ const SecondFloor = () => {
               backgroundColor: isReserved(seatNumber) ? "#FF0000" : "#70FF00",
               border: "1px solid black",
             }}
+            onClick={() => handleSeatClick(seatNumber)}
           >
             {seatNumber}
           </div>
         ))}
       </Col>
+      {selectedSeat !== null && (
+        <Modal seatNumber={selectedSeat} closeModal={closeModal} />
+      )}
     </>
   );
 };
