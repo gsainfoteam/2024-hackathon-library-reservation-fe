@@ -1,8 +1,14 @@
-import { useState, useEffect, useRef } from "react";
-import polygon from "./assets/polygon.svg";
-import "./TimeDropdown.css";
+import { useState, useEffect, useRef } from 'react';
+import polygon from './assets/polygon.svg';
+import './TimeDropdown.css';
 
-const TimeDropdown = () => {
+const TimeDropdown = ({
+  onChange,
+  end = false,
+}: {
+  end?: boolean;
+  onChange: (time: number) => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -20,9 +26,9 @@ const TimeDropdown = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("click", handleClickOutside);
+    window.addEventListener('click', handleClickOutside);
     return () => {
-      window.removeEventListener("click", handleClickOutside);
+      window.removeEventListener('click', handleClickOutside);
     };
   }, []);
 
@@ -34,24 +40,18 @@ const TimeDropdown = () => {
         className="roomDropdown"
         onClick={toggleDropdown}
       />
-      <div className={`dropdown-content ${isOpen ? "show" : ""}`}>
-        <a href="#">08:00</a>
-        <a href="#">09:00</a>
-        <a href="#">10:00</a>
-        <a href="#">11:00</a>
-        <a href="#">12:00</a>
-        <a href="#">13:00</a>
-        <a href="#">14:00</a>
-        <a href="#">15:00</a>
-        <a href="#">16:00</a>
-        <a href="#">17:00</a>
-        <a href="#">18:00</a>
-        <a href="#">19:00</a>
-        <a href="#">20:00</a>
-        <a href="#">21:00</a>
-        <a href="#">22:00</a>
-        <a href="#">23:00</a>
-        <a href="#">24:00</a>
+      <div className={`dropdown-content ${isOpen ? 'show' : ''}`}>
+        {[...Array(16)].map((_, i) => (
+          <button
+            key={i}
+            onClick={() => {
+              onChange(i + 8);
+              setIsOpen(false);
+            }}
+          >{`${(i + 8).toString().padStart(2, '0')}:${
+            end ? 59 : '00'
+          }`}</button>
+        ))}
       </div>
     </div>
   );
