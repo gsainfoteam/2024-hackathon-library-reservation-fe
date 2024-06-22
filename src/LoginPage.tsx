@@ -4,7 +4,7 @@ import useUser from './hooks/useUser';
 
 const LoginPage = () => {
   const SCOPES = [
-    { field: 'redirect_uri', value: 'http://localhost:5173/user/join' },
+    { field: 'redirect_uri', value: `${import.meta.env.BASE_URL}/user/join` },
     { field: 'client_id', value: 'library_reservation' },
     { field: 'scope', value: 'openid profile email student_id offline_access' },
     { field: 'response_type', value: 'code' },
@@ -21,11 +21,7 @@ const LoginPage = () => {
   }, [authCode, login]);
 
   return (
-    <form
-      action={
-        'https://idp.gistory.me/authorize?client_id=library_reservation&redirect_uri=http://localhost:5173/user/join&scope=openid%20profile%20email%20student_id%20offline_access&response_type=code&prompt=consent'
-      }
-    >
+    <form action={'https://idp.gistory.me/authorize'}>
       {SCOPES.map((scope) => {
         return (
           <input
