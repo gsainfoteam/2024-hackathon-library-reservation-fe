@@ -12,17 +12,19 @@ const Router = () => {
   const { me } = useUser();
   return (
     <BrowserRouter>
-      {me ? (
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route element={<Navigate to="/" />} />
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/user/join" element={<LoginPage />} />
-          <Route element={<Navigate to="/user/join" />} />
-        </Routes>
-      )}
+      <Routes>
+        {me ? (
+          <>
+            <Route index element={<MainPage />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </>
+        ) : (
+          <>
+            <Route path="/user/join" element={<LoginPage />} />
+            <Route path="*" element={<Navigate to="/user/join" />} />
+          </>
+        )}
+      </Routes>
     </BrowserRouter>
   );
 };

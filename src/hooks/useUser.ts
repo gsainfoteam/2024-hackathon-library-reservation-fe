@@ -4,9 +4,14 @@ import { useQuery } from '@tanstack/react-query';
 import { getMe } from '../api/reservation';
 
 export const useUserProvider = () => {
-  const { data: me, refetch } = useQuery({
+  const {
+    data: me,
+    refetch,
+    error,
+  } = useQuery({
     queryKey: ['user'],
     queryFn: getMe,
+    retry: false,
   });
 
   const handleLogin = useCallback(
@@ -23,7 +28,7 @@ export const useUserProvider = () => {
     refetch();
   }, [refetch]);
 
-  return { login: handleLogin, me, logout: handleLogout };
+  return { login: handleLogin, me: error ? null : me, logout: handleLogout };
 };
 
 export const userContext = createContext<ReturnType<

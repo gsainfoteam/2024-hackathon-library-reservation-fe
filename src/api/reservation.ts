@@ -10,4 +10,4 @@ export interface MyInfo {
 }
 
 export const getMe = () =>
-  api.get<MyInfo>('/library/me').then((res) => res.data);
+  api.get<MyInfo>('library/me').then((res) => res.data);

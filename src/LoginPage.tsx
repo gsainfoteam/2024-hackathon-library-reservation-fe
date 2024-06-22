@@ -6,7 +6,7 @@ const LoginPage = () => {
   const SCOPES = [
     {
       field: 'redirect_uri',
-      value: `${import.meta.env.WEB_BASE_URL}/user/join`,
+      value: `${import.meta.env.VITE_PUBLIC_BASE_URL}/user/join`,
     },
     { field: 'client_id', value: 'library_reservation' },
     { field: 'scope', value: 'openid profile email student_id offline_access' },
