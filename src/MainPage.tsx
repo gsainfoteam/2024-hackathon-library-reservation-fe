@@ -8,6 +8,7 @@ import './MainPage.css';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import { RoomType } from './utils/room';
+import useUser from './hooks/useUser';
 
 const LoginPage = () => {
   const isAuthorized = localStorage.getItem('accessToken');
@@ -15,10 +16,12 @@ const LoginPage = () => {
   const [roomType, setRoomType] = useState<RoomType>('SmallCarrels');
   const [startTime, setStartTime] = useState<number>(9);
   const [endTime, setEndTime] = useState<number>(14);
+  const { logout } = useUser();
 
   return (
     <div>
       {isAuthorized ? '' : <Navigate to="/user/join" replace={true} />}
+      <button onClick={logout}>logout</button>
       <div className="element">
         <header className="header">도서관 예약 시스템</header>
 

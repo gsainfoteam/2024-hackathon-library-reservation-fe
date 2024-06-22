@@ -1,17 +1,31 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import LoginPage from './LoginPage.tsx'
-import MainPage from './MainPage.tsx'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoginPage from './LoginPage.tsx';
+import MainPage from './MainPage.tsx';
+import './App.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import UserProvider from './hooks/UserProvider.tsx';
 
-const App = () => {
+const queryClient = new QueryClient();
+
+const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/user/join" element={<LoginPage/>}/>
-        <Route path="/" element={<MainPage/>}/>
+        <Route path="/user/join" element={<LoginPage />} />
+        <Route path="/" element={<MainPage />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 };
 
-export default App
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <UserProvider>
+        <Router />
+      </UserProvider>
+    </QueryClientProvider>
+  );
+};
+
+export default App;

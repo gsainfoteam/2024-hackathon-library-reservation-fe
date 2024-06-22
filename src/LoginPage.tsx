@@ -1,49 +1,44 @@
-import { useEffect } from "react"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import useUser from './hooks/useUser';
 
 const LoginPage = () => {
-
   const SCOPES = [
-    { field: "redirect_uri", value: "http://localhost:5173/user/join" },
-    { field: "client_id", value: "library_reservation" },
-    { field: "scope", value: "openid profile email student_id offline_access" },
-    { field: "response_type", value: "code" },
-    { field: "prompt", value: "consent" },
-  ]
-  
-  const [searchParams, setSearchParams] = useSearchParams();
-  const authCode = searchParams.get("code");
+    { field: 'redirect_uri', value: 'http://localhost:5173/user/join' },
+    { field: 'client_id', value: 'library_reservation' },
+    { field: 'scope', value: 'openid profile email student_id offline_access' },
+    { field: 'response_type', value: 'code' },
+    { field: 'prompt', value: 'consent' },
+  ];
+
+  const [searchParams] = useSearchParams();
+  const authCode = searchParams.get('code');
+  const { login } = useUser();
 
   useEffect(() => {
-    if (!!authCode) {
-      console.log(authCode)
-      localStorage.setItem("accessToken", "12345")
-    }
-  }, [])
-
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      navigate("/");
-    }
-  }, [])
+    if (!authCode) return;
+    login(authCode);
+  }, [authCode, login]);
 
   return (
-    <form action={'https://idp.gistory.me/authorize?client_id=library_reservation&redirect_uri=http://localhost:5173/user/join&scope=openid%20profile%20email%20student_id%20offline_access&response_type=code&prompt=consent'}>
+    <form
+      action={
+        'https://idp.gistory.me/authorize?client_id=library_reservation&redirect_uri=http://localhost:5173/user/join&scope=openid%20profile%20email%20student_id%20offline_access&response_type=code&prompt=consent'
+      }
+    >
       {SCOPES.map((scope) => {
         return (
           <input
-              key={scope.field}
-              name={scope.field}
-              value={scope.value}
-              type={"hidden"}
+            key={scope.field}
+            name={scope.field}
+            value={scope.value}
+            type={'hidden'}
           />
         );
       })}
       <button type="submit">Login</button>
     </form>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
