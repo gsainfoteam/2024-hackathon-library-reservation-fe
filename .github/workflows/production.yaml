@@ -25,4 +25,4 @@ jobs:
           projectName: lrs-fe
           directory: dist
           gitHubToken: ${{ github.token }}
-          branch: master
+          branch: main
