@@ -1,24 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './Filter.css';
 import RoomDropdown from './RoomDropdown';
 import TimeDropdown from './TimeDropdown';
+import { RoomType, roomTypes } from './utils/room';
 
-export const roomTypes = {
-  SmallCarrels: '2F 소형 개인 열람실',
-  SmallGroupStudy: '2F 5인 회의실',
-  MediumGroupStudy: '2F 8인 회의실',
-  LargeGroupStudy: '3F 10인 회의실',
-  MultiMedia: '4F 멀티미디어실',
-};
-export type RoomType = keyof typeof roomTypes;
-
-const Filter = () => {
-  const [roomType, setRoomType] = useState<RoomType>('SmallCarrels');
-  const [startTime, setStartTime] = useState<number>(9);
-  const [endTime, setEndTime] = useState<number>(14);
-
+const Filter = ({
+  setStartTime,
+  setEndTime,
+  startTime,
+  endTime,
+  roomType,
+  setRoomType,
+}: {
+  startTime: number;
+  endTime: number;
+  setStartTime: (time: number) => void;
+  setEndTime: (time: number) => void;
+  roomType: RoomType;
+  setRoomType: (roomType: RoomType) => void;
+}) => {
   return (
     <Container>
       <Row>

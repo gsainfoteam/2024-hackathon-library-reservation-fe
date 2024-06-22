@@ -1,51 +1,27 @@
-import { Row, Col, Container } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
-import polygon from "./assets/polygon.svg";
-import "./Calender.css";
-import dayjs from "dayjs";
+import { Row, Col, Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
+import polygon from './assets/polygon.svg';
+import './Calender.css';
+import dayjs from 'dayjs';
 
-const Calender = () => {
+const Calender = ({
+  selectedDate,
+  onChange,
+}: {
+  selectedDate: dayjs.Dayjs;
+  onChange: (date: dayjs.Dayjs) => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleCalender = () => {
     setIsOpen(!isOpen);
   };
 
-  const startOfWeek = dayjs().startOf("week");
+  const startOfWeek = dayjs().startOf('week');
   const daysOfWeek = [...Array(28).keys()].map((offset) =>
-    startOfWeek.add(offset, "day")
+    startOfWeek.add(offset, 'day'),
   );
-
-  const calenderText = () => {
-    if (isOpen) {
-      return (
-        <>
-          <Row className="WeekNum">
-            {daysOfWeek.slice(7, 14).map((day) => (
-              <Col key={day.format("YYYY-MM-DD")} className="WeekNum-text">
-                {day.format("DD")}
-              </Col>
-            ))}
-          </Row>
-          <Row className="WeekNum">
-            {daysOfWeek.slice(14, 21).map((day) => (
-              <Col key={day.format("YYYY-MM-DD")} className="WeekNum-text">
-                {day.format("DD")}
-              </Col>
-            ))}
-          </Row>
-          <Row className="WeekNum">
-            {daysOfWeek.slice(21, 28).map((day) => (
-              <Col key={day.format("YYYY-MM-DD")} className="WeekNum-text">
-                {day.format("DD")}
-              </Col>
-            ))}
-          </Row>
-        </>
-      );
-    }
-  };
 
   return (
     <Container>
@@ -69,14 +45,21 @@ const Calender = () => {
         <Col className="Week-text">금</Col>
         <Col className="Week-text">토</Col>
       </Row>
-      <Row className="WeekNum">
-        {daysOfWeek.slice(0, 7).map((day) => (
-          <Col key={day.format("YYYY-MM-DD")} className="WeekNum-text">
-            {day.format("DD")}
-          </Col>
-        ))}
-      </Row>
-      {calenderText()}
+      {[...Array(isOpen ? 4 : 1)].map((_, i) => (
+        <Row className="WeekNum">
+          {daysOfWeek.slice(i * 7, i * 7 + 7).map((day) => (
+            <Col
+              key={day.format('YYYY-MM-DD')}
+              className={`WeekNum-text ${
+                day.isSame(selectedDate, 'day') ? 'selected' : ''
+              }`}
+              onClick={() => onChange(day)}
+            >
+              {day.format('DD')}
+            </Col>
+          ))}
+        </Row>
+      ))}
     </Container>
   );
 };

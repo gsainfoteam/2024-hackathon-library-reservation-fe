@@ -2,14 +2,19 @@ import { Navigate } from 'react-router-dom';
 import Calender from './Calender';
 import Filter from './Filter';
 import Seats from './Seats';
-import polygon from './assets/polygon.svg';
 
 //import eclipse from './assets/Eclipse.svg'
 import './MainPage.css';
-import Dropdown from './Dropdown';
+import { useState } from 'react';
+import dayjs from 'dayjs';
+import { RoomType } from './utils/room';
 
 const LoginPage = () => {
   const isAuthorized = localStorage.getItem('accessToken');
+  const [date, setDate] = useState<dayjs.Dayjs>(dayjs().startOf('day'));
+  const [roomType, setRoomType] = useState<RoomType>('SmallCarrels');
+  const [startTime, setStartTime] = useState<number>(9);
+  const [endTime, setEndTime] = useState<number>(14);
 
   return (
     <div>
@@ -18,11 +23,18 @@ const LoginPage = () => {
         <header className="header">도서관 예약 시스템</header>
 
         <div className="calender">
-          <Calender />
+          <Calender selectedDate={date} onChange={setDate} />
         </div>
 
         <div className="filter">
-          <Filter />
+          <Filter
+            setStartTime={setStartTime}
+            setEndTime={setEndTime}
+            startTime={startTime}
+            endTime={endTime}
+            roomType={roomType}
+            setRoomType={setRoomType}
+          />
         </div>
 
         <div className="seats">

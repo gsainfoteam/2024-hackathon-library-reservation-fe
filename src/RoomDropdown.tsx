@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import polygon from './assets/polygon.svg';
 import './RoomDropdown.css';
-import { RoomType, roomTypes } from './Filter';
+import { RoomType, roomTypes } from './utils/room';
 
 const RoomDropdown = ({
   onChange,
