@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import { Row, Col } from "react-bootstrap";
-import "./SecondFloor.css";
+import { useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import './SecondFloor.css';
 
 interface ModalProps {
   seatNumber: number;
@@ -31,7 +31,7 @@ const SecondFloor: React.FC = () => {
           &times;
         </span>
         <p>Seat Number: {seatNumber}</p>
-        <p>Status: {isReserved(seatNumber) ? "Reserved" : "Available"}</p>
+        <p>Status: {isReserved(seatNumber) ? 'Reserved' : 'Available'}</p>
       </div>
     </div>
   );
@@ -45,8 +45,8 @@ const SecondFloor: React.FC = () => {
             className="col-auto leftSeat"
             key={seatNumber}
             style={{
-              backgroundColor: isReserved(seatNumber) ? "#FF0000" : "#70FF00",
-              border: "1px solid black",
+              backgroundColor: isReserved(seatNumber) ? '#FF0000' : '#70FF00',
+              border: '1px solid black',
             }}
             onClick={() => handleSeatClick(seatNumber)}
           >
@@ -61,8 +61,8 @@ const SecondFloor: React.FC = () => {
               className="col-auto middleSeat"
               key={seatNumber}
               style={{
-                backgroundColor: isReserved(seatNumber) ? "#FF0000" : "#70FF00",
-                border: "1px solid black",
+                backgroundColor: isReserved(seatNumber) ? '#FF0000' : '#70FF00',
+                border: '1px solid black',
               }}
               onClick={() => handleSeatClick(seatNumber)}
             >
@@ -80,8 +80,8 @@ const SecondFloor: React.FC = () => {
             className="col-auto rightSeat"
             key={seatNumber}
             style={{
-              backgroundColor: isReserved(seatNumber) ? "#FF0000" : "#70FF00",
-              border: "1px solid black",
+              backgroundColor: isReserved(seatNumber) ? '#FF0000' : '#70FF00',
+              border: '1px solid black',
             }}
             onClick={() => handleSeatClick(seatNumber)}
           >
