@@ -4,7 +4,10 @@ import useUser from './hooks/useUser';
 
 const LoginPage = () => {
   const SCOPES = [
-    { field: 'redirect_uri', value: `${import.meta.env.BASE_URL}/user/join` },
+    {
+      field: 'redirect_uri',
+      value: `${import.meta.env.WEB_BASE_URL}/user/join`,
+    },
     { field: 'client_id', value: 'library_reservation' },
     { field: 'scope', value: 'openid profile email student_id offline_access' },
     { field: 'response_type', value: 'code' },
