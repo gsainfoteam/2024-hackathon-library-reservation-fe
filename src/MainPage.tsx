@@ -9,6 +9,8 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import { RoomType } from './utils/room';
 import useUser from './hooks/useUser';
+import { useQuery } from '@tanstack/react-query';
+import { searchReservation } from './api/reservation';
 
 const LoginPage = () => {
   const isAuthorized = localStorage.getItem('accessToken');
@@ -17,6 +19,16 @@ const LoginPage = () => {
   const [startTime, setStartTime] = useState<number>(9);
   const [endTime, setEndTime] = useState<number>(14);
   const { logout } = useUser();
+  const { data } = useQuery({
+    queryKey: ['search', date, startTime, endTime, roomType],
+    queryFn: () =>
+      searchReservation({
+        roomType,
+        reserveDate: date.format('YYYYMMDD'),
+        reserveFrom: startTime,
+        reserveTo: endTime,
+      }),
+  });
 
   return (
     <div>
@@ -41,7 +53,13 @@ const LoginPage = () => {
         </div>
 
         <div className="seats">
-          <Seats />
+          <Seats
+            reservedSeats={
+              data
+                ?.filter((room) => room.occupied)
+                .map((room) => +room.roomId) ?? []
+            }
+          />
         </div>
       </div>
     </div>

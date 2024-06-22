@@ -7,8 +7,7 @@ interface ModalProps {
   closeModal: () => void;
 }
 
-const SecondFloor: React.FC = () => {
-  const reservedSeats: number[] = [240];
+const SecondFloor = ({ reservedSeats }: { reservedSeats: number[] }) => {
   const [selectedSeat, setSelectedSeat] = useState<number | null>(null);
 
   const isReserved = (seatNumber: number): boolean => {

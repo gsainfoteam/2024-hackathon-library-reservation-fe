@@ -1,11 +1,11 @@
-import { Row, Col, Container } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import red from "./assets/red.svg";
-import green from "./assets/green.svg";
-import "./Seats.css";
-import SecondFloor from "./SecondFloor";
+import { Row, Col, Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import red from './assets/red.svg';
+import green from './assets/green.svg';
+import './Seats.css';
+import SecondFloor from './SecondFloor';
 
-const Seats = () => {
+const Seats = ({ reservedSeats }: { reservedSeats: number[] }) => {
   return (
     <Container>
       <Row>
@@ -26,7 +26,7 @@ const Seats = () => {
         </Col>
       </Row>
       <Row>
-        <SecondFloor />
+        <SecondFloor reservedSeats={reservedSeats} />
       </Row>
     </Container>
   );
